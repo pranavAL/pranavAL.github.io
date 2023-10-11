@@ -14,6 +14,20 @@
             bottom: 0;
             left: 0;
         }
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        } 
+
+        .timeline li {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+        .timeline li div:first-child {
+        min-width: 100px;
+        }
     </style>
 </head>
 
@@ -27,7 +41,7 @@
               <p style="text-align:center">
                 <name>Pranav Agarwal</name>
               </p>
-              <p>I am a PhD candidate at Mila, advised by <a href="https://saebrahimi.github.io/">Samira Ebrahimi Kahou</a> and <a href="https://profs.etsmtl.ca/sandrews/">Sheldon Andrews</a>. I work on Deep Reinforcement Learning for robotic applications and character animation. I am fasicnated by the potential of leveraging human knowledge to guide reinforcement learning policies for solving complex real-world applications.</p>
+              <p>I am a first year PhD student at Mila, advised by <a href="https://saebrahimi.github.io/">Samira Ebrahimi Kahou</a> and <a href="https://profs.etsmtl.ca/sandrews/">Sheldon Andrews</a>. I work on Deep Reinforcement Learning for robotic applications and character animation. I am fasicnated by the potential of leveraging human knowledge to guide reinforcement learning policies for solving complex real-world applications.</p>
               <p> Previously, I was a student researcher at <a href="https://www.inria.fr/en">Inria</a> where I collaborated with <a href="https://sites.google.com/view/nataliadiaz">Natalia Díaz-Rodríguez</a> and
          <a href="https://team.inria.fr/rits/membres/raoul-de-charette/">Raoul de CHARETTE</a>. I completed my Bachelors in Electronics and Communication Engineering at <a href="https://www.iiitg.ac.in/">IIIT Guwahati</a>, where I was awarded the President's Gold Medal. During my bachelor's I worked as a research intern at <a href="https://www.sutd.edu.sg/">SUTD</a> with Professor <a href="https://scholar.google.com/citations?user=6MjMhT4AAAAJ&hl=en">Gemma Roig</a>.
         
@@ -46,27 +60,61 @@
             </td>
           </tr>
         </tbody></table>
-        
+        <!-- <h2>Background</h2> -->
         <p> 
-        
+        <!-- with <a href="https://webdocs.cs.ualberta.ca/~dale/">Dale Schuurmans</a> and <a href="https://www.afaust.info/">Aleksandra Faust</a> in similar areas. --> 
+        <!-- I was fortunate to also work on consumer privacy rights and legislation with folks from <a href="https://www.law.georgetown.edu/privacy-technology-center">Georgetown's Center on Privacy and Technology.</a></p> -->
               </p>
               <p>
               </p>
         <h2>News</h2>
 
-            <ul>
-                <li><b>Oct 2023</b>: <b>Reviewer</b> - Served as reviewer for <a href="https://iccv2023.thecvf.com/">ICCV</a>, <a href="https://ieee-iros.org/">IROS</a>, <a href="https://www.ieee-ras.org/publications/ra-l">Robotics and Automation Letters</a>, and <a href="https://sice-si.org/SII2024/">SII</a>.</li> 
-                <li><b>Sept 2023</b>: Passed the Ph.D. proposal exam.</li>                 
-                <li><b>December 2022</b>: <b style="color:red">Paper @ RL4RL, Neurips</b> - Our work <a href="https://arxiv.org/pdf/2211.07941.pdf">Automatic Evaluation of Excavator Operators using Learned Reward Functions</a> was accepted at Reinforcement Learning for Real Life Workshop at Neurips 2022.</li>
-                <li><b>September 2022</b>: <b>Position</b> - Fast-tracked to a PhD position at <a href="https://mila.quebec/">Mila</a>.
-                <li><b>January 2022</b>: <b>Position</b> - Started Masters by Research at <a href="https://mila.quebec/">Mila</a>, in collaboration with <a href="https://www.cm-labs.com/en/">CM Labs</a>. 
-                <li><b>March 2020</b>: <b style="color:red">Paper @ ML-IRL, ICLR</b> - Our work <a href="https://arxiv.org/pdf/2003.11743.pdf">Egoshots</a> was accepted at Machine Learning in Real Life Workshop at ICLR 2020.
-                <li><b>May 2019</b>: <b>Position</b> - Started a research position at Inria.</li>
-                <li><b>April 2019</b>: <b style="color:red">Graduation</b> - Graduated from IIIT Guwahati with President's Gold Medal.</li>
-                <li><b>March 2019</b>: <b>Paper @ TENSYMP</b> - Our work <a href="https://ieeexplore.ieee.org/abstract/document/8971330">Learning to synthesize faces using voice clips for Cross-Modal biometric matching</a> was accepted at IEEE Region 10 Symposium (TENSYMP).</li>
-                <li><b>March 2019</b>: <b style="color:red">Award</b> - Received the Best Technology Award (reward of 1500 USD) by Govt. of India.</li>
-                <li><b>May 2018</b>: <b>Position</b> - Started a Research Internship at <a><a href="https://www.sutd.edu.sg/">Singapore University of Technology and Design</a>.</li>
-            </ul>
+        <ul class="timeline">
+          <li>
+            <div><b>Oct 2023</b>:</div>
+            <div><b>Reviewer</b> - Served as reviewer for <a href="https://iccv2023.thecvf.com/">ICCV</a>, <a href="https://ieee-iros.org/">IROS</a>, <a href="https://www.ieee-ras.org/publications/ra-l">Robotics and Automation Letters</a>, and <a href="https://sice-si.org/SII2024/">SII</a>.</div>
+          </li>
+          <li>
+            <div><b>Sept 2023</b>:</div>
+            <div>Passed the Ph.D. proposal exam.</div>
+          </li>
+          <li>
+            <div><b>Dec 2022</b>:</div>
+            <div><b style="color:red">Paper @ RL4RL, Neurips</b> - Our work <a href="https://arxiv.org/pdf/2211.07941.pdf">Automatic Evaluation of Excavator Operators using Learned Reward Functions</a> was accepted at Reinforcement Learning for Real Life Workshop at Neurips 2022.</div>
+          </li>
+          <li>
+            <div><b>Sept 2022</b>:</div>
+            <div><b>Position</b> - Fast-tracked to a PhD position at <a href="https://mila.quebec/">Mila</a>.</div>
+          </li>
+          <li>
+            <div><b>Jan 2022</b>:</div>
+            <div><b>Position</b> - Started Masters by Research at <a href="https://mila.quebec/">Mila</a>, in collaboration with <a href="https://www.cm-labs.com/en/">CM Labs</a>.</div>
+          </li>
+          <li>
+            <div><b>Mar 2020</b>:</div>
+            <div><b style="color:red">Paper @ ML-IRL, ICLR</b> - Our work <a href="https://arxiv.org/pdf/2003.11743.pdf">Egoshots</a> was accepted at Machine Learning in Real Life Workshop at ICLR 2020.</div>
+          </li>
+          <li>
+            <div><b>May 2019</b>:</div>
+            <div><b>Position</b> - Started a research position at Inria.</div>
+          </li>
+          <li>
+            <div><b>Apr 2019</b>:</div>
+            <div><b style="color:red">Graduation</b> - Graduated from IIIT Guwahati with President's Gold Medal.</div>
+          </li>
+          <li>
+            <div><b>Mar 2019</b>:</div>
+            <div><b>Paper @ TENSYMP</b> - Our work <a href="https://ieeexplore.ieee.org/abstract/document/8971330">Learning to synthesize faces using voice clips for Cross-Modal biometric matching</a> was accepted at IEEE Region 10 Symposium (TENSYMP).</div>
+          </li>
+          <li>
+            <div><b>Mar 2019</b>:</div>
+            <div><b style="color:red">Award</b> - Received the Best Technology Award (reward of 1500 USD) by Govt. of India.</div>
+          </li>
+          <li>
+            <div><b>May 2018</b>:</div>
+            <div><b>Position</b> - Started a Research Internship at <a href="https://www.sutd.edu.sg/">Singapore University of Technology and Design</a>.</div>
+          </li>
+        </ul>
             <!--<h2>Research 	&#129302;</h2>-->
         <h2>Research</h2>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
@@ -89,7 +137,7 @@
               <em> In submission (2023)</em>. 
               <br>
               [
-              <a href="https://arxiv.org/pdf/2307.05979.pdf">Paper</a> 
+              <a href="">Paper</a> 
                ]
               <br>
               <p>
@@ -286,15 +334,13 @@ annotations, making it highly useful for real life generated captions.
     <div style="display: inline-block; margin-top: 40px;">
         <table class="analytics">
             <tr>
-                <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=90&t=n&d=7GitBdIjM6_HrTVgbGuqjaG9RLy_0UXsikjyC2QZBVQ"></script>
+                <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=150&t=n&d=7GitBdIjM6_HrTVgbGuqjaG9RLy_0UXsikjyC2QZBVQ"></script>
             </tr>
         </table>
     </div>
+</div>able>
 </div>
   
- </body>
-
-</html>
  </body>
 
 </html>
