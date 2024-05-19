@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Learning to Play Atari in a World of Tokens">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning to Play Atari in a World of Tokens</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <style>
+    .publication-title {
+      color: #2c3e50; /* Darker shade for better contrast */
+    }
+    .publication-authors, .publication-conference {
+      margin-top: 1rem;
+    }
+    .author-block {
+      display: inline-block;
+      margin-right: 1rem; /* Increased spacing between authors */
+    }
+    .publication-authors a {
+      color: #2980b9; /* Bright blue color for better contrast */
+      text-decoration: none;
+    }
+    .publication-authors a:hover {
+      text-decoration: underline;
+    }
+    .publication-conference {
+      color: #8e44ad; /* A contrasting color for the conference info */
+      font-weight: bold;
+    }
+
+    .publication-links {
+      margin-top: 1rem;
+    }
+    .link-block {
+      margin: 0.5rem;
+    }
+    .external-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #363636;
+      border: none;
+      border-radius: 25px;
+      transition: background-color 0.3s ease;
+    }
+    .external-link:hover {
+      background-color: #4a4a4a;
+      text-decoration: none;
+    }
+    .external-link .icon {
+      margin-right: 0.5rem;
+    }  
+
+    .divider {
+      margin-top: 2rem;
+      border: 0;
+      height: 1px;
+      background: #ccc;
+      background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    }
+
+    .abstract-section {
+      margin-top: 0; /* Reduced top margin for abstract section */
+      padding-left: 1rem;
+      margin-bottom: 0;
+    }
+    .abstract-title {
+      text-align: left; /* Left-align the abstract section title */
+      margin-left: 0;
+    }
+    .abstract-content {
+      text-align: justify; /* Justify the abstract content */
+    }  
+  </style>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Learning to Play Atari in a World of Tokens</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://pranaval.github.io/">Pranav Agarwal</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://profs.etsmtl.ca/sandrews/"> Sheldon Andrews</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://saebrahimi.github.io/">Samira Ebrahimi Kahou</a><sup>1,2,3</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>ÉTS Montréal,</span>
+            <span class="author-block"><sup>2</sup>Mila, Quebec AI Institute,</span>
+            <span class="author-block"><sup>3</sup>CIFAR</span>
+          </div>
+
+          <div class="is-size-5 publication-conference">
+            ICML 2024 (Poster)
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- arXiv Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <!-- Slides Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link">
+                  <span class="icon">
+                      <i class="fas fa-chalkboard-teacher"></i>
+                  </span>
+                  <span>Slides</span>
+                </a>
+              </span>
+              <!-- Talk Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link">
+                  <span class="icon">
+                      <i class="fas fa-video"></i>
+                  </span>
+                  <span>Talk</span>
+                </a>
+              </span>
+            </div>
+            <hr class="divider">
+
+            
+
+          </div>
+          <section class="abstract-section">
+            <div class="container is-max-desktop">
+                  <h2 class="title is-3 abstract-title">Abstract</h2>
+                  <div class="content abstract-content">
+                    <p>
+                      Model-based reinforcement learning agents utilizing transformers have shown improved sample efficiency due to their ability to model extended context, resulting in more accurate world models.
+                      However, for complex reasoning and planning tasks, these methods primarily rely on continuous representations.
+                      This complicates modeling of discrete properties of the real world such as disjoint object classes between which interpolation is not plausible.
+                      In this work, we introduce discrete abstract representations for transformer-based learning (DART), a sample-efficient method utilizing discrete representations for modeling both the world and learning behavior. We incorporate a transformer-decoder for auto-regressive world modeling and a transformer-encoder for learning behavior by attending to task-relevant cues in the discrete representation of the world model. For handling partial observability, we aggregate information from past time steps as memory tokens.  
+                      DART outperforms previous state-of-the-art methods that do not use look-ahead search on the Atari 100k sample efficiency benchmark with a median human-normalized score of 0.790 and beats humans in 9 out of 26 games.
+                    </p>
+              </div>          
+            </div>
+          </section>
+          <hr class="divider">
+        </div>
+      </div>
+    </div>
+    <section class="abstract-section">
+      <div class="container is-max-desktop">
+            <h2 class="title is-3 abstract-title">Architecture</h2>
+            <div class="content abstract-content">
+              <td style="padding:0px;width:65%;vertical-align:middle">
+                <img src="./static/images/dtr.png" alt="elign" style="border-style: none; max-width: 100%;" width="1550">
+              </td>
+              <hr class="divider">       
+    
+      </div>
+        </div> 
+
+      </section>  
+      </div>
+
+      <section class="abstract-section">
+        <div class="container is-max-desktop">
+              <h2 class="title is-3 abstract-title">Results</h2>
+              <div class="content abstract-content">
+                <td style="padding:0px;width:65%;vertical-align:middle">
+                  <img src="./static/images/result.png" alt="elign" style="border-style: none; max-width: 105%;" width="1550">
+                </td>
+                <hr class="divider">       
+      
+        </div>
+          </div> 
+  
+        </section>  
+        </div>
+        <section class="abstract-section">
+          <div class="container is-max-desktop">
+                <h2 class="title is-3 abstract-title">Interpretability</h2>
+                <div class="content abstract-content">
+                  <td style="padding:0px;width:65%;vertical-align:middle">
+                    <img src="./static/images/interp.png" alt="elign" style="border-style: none; max-width: 105%;" width="1550">
+                  </td>
+                  <hr class="divider">       
+        
+          </div>
+            </div> 
+    
+          </section>   
+
+          <section class="abstract-section">
+            <div class="container is-max-desktop">
+                  <h2 class="title is-3 abstract-title">Ablation</h2>
+                  <div class="content abstract-content">
+                    <td style="padding:0px;width:65%;vertical-align:middle">
+                      <img src="./static/images/ablat.png" alt="elign" style="border-style: none; max-width: 105%;" width="1550">
+                    </td>
+                    <hr class="divider">       
+          
+            </div>
+              </div> 
+      
+            </section>  
+
+            <section class="abstract-section">
+              <div class="container is-max-desktop">
+                    <h2 class="title is-3 abstract-title">Scalability</h2>
+                    <div class="content abstract-content">
+                      <td style="padding:0px;width:65%;vertical-align:middle">
+                        <img src="./static/images/scalability.png" alt="elign" style="border-style: none; max-width: 105%;" width="1550">
+                      </td>
+                      <hr class="divider">       
+            
+              </div>
+                </div> 
+        
+              </section>  
+              <section class="abstract-section">
+                <div class="container is-max-desktop">
+                      <h2 class="title is-3 abstract-title">Conclusion</h2>
+                      <div class="content abstract-content">
+                        <p>
+                          In this work, we introduced DART, a model-based reinforcement learning agent that learns both the model and the policy using discrete tokens. Through our experiments, we demonstrated our approach helps in improving performance
+and achieves a new state-of-the-art score on the Atari 100k benchmarks for methods with no look-ahead search during inference. Moreover, our approach for memory modeling and the use of a transformer for policy modeling provide
+additional benefits in terms of interpretability. As of now, our method is primarily designed for environments with discrete action spaces. This limitation poses a significant challenge, considering that many real-
+world robotic control tasks necessitate continuous action spaces. For future work, it would be interesting to adapt our approach to continuous action spaces and modeling better-disentangled tokens for faster learning.
+                        </p>
+                        <hr class="divider">
+
+                  </div>          
+                </div>
+              </section>
+      
+    
+    
+  </div>
+  
+
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <td style="padding:20px;width:25%;vertical-align:middle">
+              <img src="./static/images/survey-full.gif" alt="elign" style="border-style: none" width="850">
+            </td>
+    </div>
+  </div>
+</section> -->
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{,
+      title={Learning to Play Atari in a World of Tokens},
+      author={Agarwal, Pranav and Andrews, Sheldon and Kahou, Samira Ebrahimi},
+      booktitle={ICML},
+      volume={},
+      number={},
+      pages={},
+      year={2024}
+    }</code></pre>
+  </div>
+</section>
+
+
+
+
+</body>
+</html>
