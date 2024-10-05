@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Deep Learning Blog">
+    <meta name="keywords" content="Deep Learning, AI, Machine Learning, Python">
+    <meta name="author" content="Pranav Agarwal">
+    <title>Diffusion Models - Blog</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+
+    <!-- Link to CSS styles (you can add your own or link to a stylesheet) -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- MathJax for Rendering Math -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1e88e5;
+            border-bottom: 2px solid #1e88e5;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 40px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        code {
+            background-color: #f1f1f1 !important;
+            padding: 1px !important;
+            font-size: 1.2rem !important;
+            border-radius: 4px !important;
+            color: #000 !important;
+            margin-bottom: 0 !important; /* Ensure no extra space at the bottom */
+        }
+    
+        /* Styling for block code inside <pre> */
+        pre {
+            background-color: #272822 !important;
+            color: #f8f8f2 !important;
+            padding: 8px !important;
+            border-radius: 5px !important;
+            margin-bottom: 5px !important; /* Reduce margin at the bottom */
+            margin-left: 0 !important;
+            padding-left: 10px !important;
+            padding-bottom: 1px !important; /* Reduce bottom padding */
+            overflow-x: auto !important;
+            font-size: 1.25rem !important;
+            line-height: 1.4 !important;
+            white-space: pre-wrap !important;
+        }
+    
+        pre code {
+            background-color: transparent !important;
+            color: inherit !important;
+            padding-left: 0 !important;
+            font-size: inherit !important;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .math-block {
+            background-color: #f9f9f9;
+            border-left: 4px solid #1e88e5;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .toc {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: #1e88e5;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #555;
+            border-left: 4px solid #1e88e5;
+            padding-left: 10px;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1e88e5;
+            color: white;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer a:hover {
+            text-decoration: none;
+        }
+
+        .button {
+            background-color: transparent; /* Transparent background */
+            color: #1e88e5; /* Text color */
+            padding: 12px 25px; /* Increased padding */
+            text-align: center;
+            border: 2px solid transparent; /* Transparent border */
+            border-radius: 25px; /* More rounded edges */
+            text-decoration: none;
+            position: relative; /* For hover effect */
+            overflow: hidden; /* Hide the overflow */
+            transition: color 0.4s; /* Smooth color transition */
+            font-size: 1rem; /* Base font size */
+            display: flex; /* Flexbox for alignment */
+            align-items: center; /* Center vertically */
+        }
+    
+        .button::before {
+            content: ''; /* Empty content for the hover effect */
+            position: absolute; /* Positioning the hover effect */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1e88e5; /* Hover background */
+            transform: scaleX(0); /* Start scaled down */
+            transition: transform 0.4s; /* Smooth transition */
+            border-radius: 25px; /* Match border radius */
+            z-index: 0; /* Send behind the text */
+        }
+    
+        .button:hover::before {
+            transform: scaleX(1); /* Expand the hover effect */
+        }
+    
+        .button:hover {
+            color: white; /* Change text color on hover */
+        }
+    
+        .button img {
+            width: 50px; /* Increased logo size */
+            height: auto; 
+            margin-right: 10px; /* More space between text and logo */
+        }
+
+        .home-button {
+            color: #363636;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid #363636;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: fixed;
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+          }
+          
+          .home-button:hover {
+            background-color: #363636;
+            color: #fff;
+          }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+                <a href="https://pranaval.github.io/" class="home-button">
+                  <i class="fas fa-home"></i> Home
+                </a>
+        <h1>Diffusion Models</h1>
+
+        <h2 id="introduction">1. Introduction</h2>
+        <p>
+            The goal of generative models is to learn the underlying distribution of data and use it to generate new, realistic samples. Traditional generative models, such as Generative
+            Adversarial Networks (GANs) and Variational Autoencoders (VAEs), face specific challenges:
+            <ul>
+                <li><strong>GANs</strong>: Despite generating high-quality samples, GANs are notoriously hard to train due to instability and mode collapse, where the generator focuses on producing a 
+                    narrow subset of data distribution.
+                </li>
+                <li>
+                <strong>VAEs</strong>: They provide stable training, but the samples tend to be blurry or less realistic because the reconstruction loss encourages the model to spread out over the
+                    latent space, leading to more average-looking samples.
+                </li>
+            </ul> 
+            Diffusion models are a class of generative mdoels that offer a new solution, combining stability and high-quality generation. These models generate data by reversing a 
+            gradual noise addition process. The model learns to undo the noise step-by-step, transforming noise into structured data, allowing for more robust generation.
+            <br><br>
+            The <strong>intuition</strong> is that instead of trying to directly generate data from a complex distribution in one step (as in GANs), the model does so progressively.
+
+        <!-- <img src="your-image-url.jpg" alt="Diffusion Model Visual" /> -->
+        <h2 id="key-concepts">2. Key Concepts</h2>
+        <h3 id="forward-process">2.1 Forward Process (Diffusion)</h3>
+        <p>
+            <ul>
+                <li>
+                    A process where the original input data is progressively corrupted by adding Gaussian noise.  The data is transformed into pure noise over multiple steps.
+                </li>
+                <li>
+                    This forward process is simple and deterministic; with the user controlling how much noise is added in each step.
+                </li>
+            </ul>
+        
+        <div class="math-block">
+                At each timestep \( t \), the nosiy data \( x_t \) is a linear combination of the clean data \( x_0 \) and noise \( \epsilon \):
+                $$ x_t = \sqrt{\alpha_{\text{cumprod}, t}}x_0 + \sqrt{1 - \alpha_{\text{cumprod}, t}}\epsilon$$
+                where:
+                <ul>
+                    <li>
+                        \( \alpha_{\text{cumprod}, t} \)  = \( \prod_{i=1}^{t} \alpha_i  \) ,  computing the cumulative \( \alpha \) at timestep \( \textit{t} \). 
+                    </li>
+                    <li>
+                        \(\epsilon \) ~ \( \mathcal{N}(0, I) \) is a Gaussian noise.
+                    </li>
+                </ul>
+        </div>
+        <ul>
+            <li>
+               The intuition here is that at each step, a bit of noise is added, and by step \( T \), the original data becomes indistinguishable from random noise. 
+            </li>
+        </ul>
+    <pre>
+    <code class="language-python">
+    def forward_diffusion(x_0, t, alphas_cumprod, device):
+        noise = torch.randn_like(x_0).to(device)
+        sqrt_alphas_cumprod = torch.sqrt(alphas_cumprod[t]).view(-1, 1, 1, 1)
+        sqrt_one_minus_alphas_cumprod = torch.sqrt(1 - alphas_cumprod[t]).view(-1, 1, 1, 1)
+        x_t = sqrt_alphas_cumprod * x_0 + sqrt_one_minus_alphas_cumprod * noise
+        return x_t, noise
+    </code>
+    </pre>
+        </p>
+        <h3 id="reverse-process">2.2 Reverse Process (Denoising)</h3>
+        <p>
+            <ul>
+                <li>
+                    The model learns the reverse process: given a noisy input \(x _T \), progressively denoisining back to \( x_0 \).
+                </li>
+                <li>
+                    Starting with pure noise, the model gradually denoises it step-by-step, eventually generating clean data.
+                </li>
+            </ul>
+            
+        <div class="math-block">
+                The reverse process is modeled as a conditional distribution:
+
+                $$p_{\theta}(x_{t-1}|x_{t}) = \mathcal{N}(x_{t-1}; \mu_{\theta}(x_t,t), \sum_{\theta}(x_t,t))$$
+                where, 
+                <ul>
+                    <li>
+                        \( \mu_\theta(x_t, t) \) is the predicted mean.
+                    </li>
+                    <li>
+                        \( \sum_{\theta}(x_t, t) \) is the predicted variance.
+                    </li>
+                </ul>
+                Each step in the reverse process predicts the less noisy smaple at time \( \textit{t} \) - 1 from the 
+                current sample \( \textit{x}_t \), based on the following decomposition:
+                $$x_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left( x_t - \frac{1 - \alpha_t}{\sqrt{1 - \alpha_{\text{cumprod}, t}}} \epsilon_\theta(x_t, t) \right) + \sigma_t z$$
+                where,
+                <ul>
+                <li>
+                    \( \epsilon_\theta(x_t, t) \) is the noise predicted by the model
+                </li>
+                <li>
+                    \( \sigma_t \) is the standard deviation for the noise
+                </li>
+                <li>
+                    \( z \sim \mathcal{N}(0, \mathbf{I}) \) is Gaussian noise.
+                </li>
+            </ul>
+        </div>
+    <pre>
+    <code class="language-python">
+    def reverse_process(model, x_T, betas, alphas_cumprod, device, timesteps):
+    
+        x = x_T
+        for t in reversed(range(timesteps)):
+            t_tensor = torch.full((x.size(0),), t, dtype=torch.long).to(device)
+            predicted_noise = model(x, t_tensor)
+            beta = betas[t]
+            alpha = 1 - beta
+            alpha_cumprod = alphas_cumprod[t]
+            sqrt_recip_alpha = 1 / torch.sqrt(alpha)
+        
+            x = sqrt_recip_alpha.view(-1, 1, 1, 1) * (x - (beta / torch.sqrt(1 - alpha_cumprod)).view(-1, 1, 1, 1) * predicted_noise)
+        
+            if t > 0:
+                noise = torch.randn_like(x).to(device)
+                sigma = torch.sqrt(beta).view(-1, 1, 1, 1)
+                x = x + sigma * noise
+        
+        return x
+    </code>
+    </pre>
+        </p>
+        <h3 id="markov-process">2.3 Markov Process</h3>
+        <p>
+            Both the forward and reverse processes are modeled as Markov chains, meaning the state of the system at each timestep \( t \) depends only on the previous step \( t \) - 1.
+            This makes it easier to define both processes using simple transition distributions.
+            <div class="math-block">
+                
+            <ul>
+                <li>
+                    <strong>Forward Process:</strong>
+                    $$q(x_t|x_{t-1}) = \mathcal{N}(x_t; \sqrt{1 - \beta_t}x_{t-1}, \beta_tI)$$
+                    Each time step adds a small amount of Gaussian noise controlled by \( \beta_t \).
+                </li>
+                <li>
+                    <strong>Reverse Process:</strong>
+                    $$p_{\theta}(x_{t-1}|x_{t}) = \mathcal{N}(x_{t-1}; \mu_{\theta}(x_t,t), \sum_{\theta}(x_t,t))$$
+                    The model learns to predict \( \text{x}_{t-1} \) based on \( \text{x}_t \), denoising data step by step.
+                </li>
+            </ul>
+        </div>
+        </p>
+        <h3 id="noise-schedule">2.4 Noise Schedule</h3>
+        <p>
+            The noise schedule \( \beta_t \) controls how much noise is added at each time step. It is important for stabilizing training and ensuring the model can reverse
+            the diffusion process.
+            <br><br>
+            Popular choice for \( \beta_t \) include:
+            <ul>
+                <li>
+                    <strong> Linear schedule:</strong> Increasing linearly from a small value to a larger value over time.
+                </li>
+                <li>
+                    <strong> Cosine scehdule:</strong> This approach computes the noise variance \( \beta_t \) at each time step using a cosine-based schedule.
+                    <div class="math-block">
+                        <ul>
+                            <li>
+                                <strong>Cosine-based cumulative product of alphas:</strong> The cosine schedule is used
+                                to create the cumulative product of \( \alpha_t \).
+                            </li>
+                            $$
+                            \alpha_{\text{cumprod}}(t) = \cos^2\left( \frac{\left( \frac{t}{T} + s \right) \cdot \frac{\pi}{2}}{1 + s} \right)
+                            $$
+                            
+
+                            where,
+                            <ul>
+                                <li>
+                                    \( \textit{t} \) is the current time-step.
+                                </li>
+                                <li>
+                                    \( \textit{T} \) is the total number of steps.
+                                </li>
+                                <li>
+                                    \( \textit{s} \) is a small constant to shift the cosine function, to avoid sharp
+                                    change at the early and later stage of the process.
+                                </li>
+                            </ul>
+
+                     <li>
+                        <strong>Compute beta values:</strong> The noise variance \( \beta_t \) represents the amount of noise added at each step.
+                     </li>
+                            $$
+                    \beta_t = 1 - \frac{\alpha_{\text{cumprod}}(t+1)}{\alpha_{\text{cumprod}}(t)}
+                    
+                    $$
+                </ul>
+                    </div>
+                    <pre>        
+                        <code class="language-python">
+    def get_cosine_beta_schedule(timesteps, s=0.008):
+        steps = timesteps + 1
+        x = torch.linspace(0, timesteps, steps)
+        alphas_cumprod = torch.cos(((x / timesteps) + s) / (1 + s) * math.pi / 2)**2
+        alphas_cumprod = alphas_cumprod / alphas_cumprod[0]
+        betas = 1 - (alphas_cumprod[1:] / alphas_cumprod[:-1])
+        betas = torch.clip(betas, 0.0001, 0.9999)
+        return betas
+                        </code>
+                        </pre> 
+                </li>
+            </ul>
+               
+        </p>    
+        <h3 id="loss-function">2.5 Loss Function</h3>
+        <p>
+            The model is trained to predict the noise added at each timestep using a mean squared error (MSE) loss.
+            <div class="math-block">
+                The training objective is:
+
+                $$\mathcal{L(\theta)} =  \mathbb{E}_{x_0,\epsilon,t}\left[ \left\| \epsilon - \epsilon_{\theta}(x_t, t) \right\|^2\right]$$
+        </div>
+        This objective encourages the network to predict the noise added at each step, allowing it to reverse the noise addition process.
+        </p>
+
+        <h3 id="train">2.6 Training:</h3>
+        <p>
+            To train a diffusion model, we sample a timestep \( t \), a data point \( x_0 \), and a noise vector \( \epsilon \), then optimize the loss:
+            <ol>
+                <li>
+                    Sample: \( t \) ~ \( Uniform(1, T) \)
+                </li>
+                <li>
+                    Generate noisy data: \( x_t = \sqrt{\overset{-}\alpha_t}x_0 + \sqrt{1 - \overset{-}\alpha_t}\epsilon \)
+                </li>
+                <li>
+                    Train the model to predict the noise: \( \mathcal{L(\theta)} =  \mathbb{E}_{x_0,\epsilon,t}\left[ \left\| \epsilon - \epsilon_{\theta}(x_t, t) \right\|^2\right] \)
+                </li>
+        
+            </ol> 
+        </p>
+        <h3 id="sample">2.7 Sampling:</h3>
+        <p>
+            After training, new samples can be generated from diffusion model by reversing the forward process:
+            <ol>
+                <li>
+                    Start with random noise: \(x_T \) ~ \( \mathcal{N}(0, I) \)
+                </li>
+                <li>
+                    For each timestep \( t = T, T - 1, ..., 1 \):
+                    <ul>
+                        <li>
+                            Sample \( x_{t-1} \) ~ \( p_{\theta}(x_{t-1}|x_{t}) \)
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    The final sample \( x_0 \) will be a realistic sample from the data distribution.
+                </li>
+            </ol>
+            The iterative denoisining process allows for high-quality and diverse data generation.
+    <pre>        
+    <code class="language-python">
+    def generate_and_save_samples(model, betas, alphas_cumprod, device, timesteps, num_samples=16):
+        model.eval()
+        with torch.no_grad():
+          # Start from pure noise
+          x_T = torch.randn(num_samples, 1, 128, 128).to(device)
+      
+          # Generate samples by reverse diffusion
+          x_0 = reverse_diffusion(model, x_T, betas, alphas_cumprod, device, timesteps)
+      
+          # Clamp the generated image to [-1, 1]
+          x_0 = torch.clamp(x_0, -1, 1)
+      
+          # Rescale to [0, 1]
+          x_0 = (x_0 + 1) / 2
+    </code>
+    </pre>
+    </p>
+    <h2 id="conclusion">4. Conclusion</h2>
+    Diffusion models offer a powerfull approach to genrative modeling, focusing on progressively denoising noisy data to recover structured outputs. Their stability and quality make 
+    them a better alternative to GANs and VAEs, especially in generating high-quality images and other data modalities.
+
+    <p>
+        The full code is availaible to run from this notebook <a href="https://colab.research.google.com/drive/1JZWQqpx8QTfkOq3Vc7yaZjpN12KllqFm?usp=sharing"> Google Colab</a>.
+    </p>    
+    <h2 id="refernce">5. References</h2>
+    <ol>
+        <li>
+            Ho, Jonathan, Ajay Jain, and Pieter Abbeel. "Denoising diffusion probabilistic models." Advances in neural information processing systems 33 (2020): 6840-6851.
+        </li>
+        <li>
+            Nichol, Alexander Quinn, and Prafulla Dhariwal. "Improved denoising diffusion probabilistic models." International conference on machine learning. PMLR, 2021.
+        </li>
+        <li>
+            Dhariwal, Prafulla, and Alexander Nichol. "Diffusion models beat gans on image synthesis." Advances in neural information processing systems 34 (2021): 8780-8794.
+        </li>
+    </ol>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-python.min.js"></script>
+
+</body>
+
+</html>
