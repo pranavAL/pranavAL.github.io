@@ -9,6 +9,9 @@
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link rel="icon" type="image/png" href="images/icon.png">
   <style>
+    html {
+            scroll-behavior: smooth;
+        }
         #widget-container {
             position: fixed;
             bottom: 0;
@@ -33,6 +36,194 @@
           max-height: 400px; /* Adjust the maximum height as needed */
           overflow-y: scroll;
         }
+
+        #blogs {
+          margin-top: 40px;
+          padding: 30px;
+          background-color: #f7f7f7;
+          border-radius: 10px;
+        }
+        
+        #blogs h2 {
+          font-size: 2em;
+          color: #333;
+          margin-bottom: 20px;
+        }
+        
+        .blog-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+          justify-content: space-between;
+        }
+        
+        .blog-entry {
+          display: flex;
+          flex-direction: column;
+          width: calc(33.33% - 20px); /* Adjust this for more or fewer columns */
+          background-color: white;
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-image {
+          width: 100%;
+          height: 180px;
+          object-fit: cover;
+        }
+        
+        .blog-content {
+          padding: 15px;
+          text-align: left;
+        }
+        
+        .blog-content h3 {
+          font-size: 1.5em;
+          margin: 0 0 10px;
+        }
+        
+        .blog-content h3 a {
+          text-decoration: none;
+          color: #0073e6;
+        }
+        
+        .blog-content h3 a:hover {
+          text-decoration: underline;
+        }
+        
+        .blog-content p {
+          font-size: 1em;
+          color: #555;
+        }
+        
+        .read-more {
+          margin-top: 10px;
+          font-size: 0.9em;
+          color: #0073e6;
+          text-decoration: none;
+          font-weight: bold;
+        }
+        
+        .read-more:hover {
+          text-decoration: underline;
+        }
+        
+        @media (max-width: 1024px) {
+          .blog-entry {
+            width: calc(50% - 20px); /* 2 columns on smaller screens */
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .blog-entry {
+            width: 100%; /* Full width on mobile */
+          }
+        }
+        section {
+          padding: 50px 20px;
+      }
+/* Project Grid with Horizontal Scroll and Centering */
+.project-grid {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center; /* Center the first project */
+  overflow-x: auto;  /* Enable horizontal scrolling */
+  white-space: nowrap;  /* Ensure the items stay in a single row */
+  transition: justify-content 0.5s ease;  /* Smooth transition when more projects are added */
+}
+
+/* Optional: Style the scrollbar for better visibility */
+.project-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.project-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.project-grid::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.project-grid::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Project Card */
+.project-card {
+  flex: 0 0 auto;
+  width: 350px; /* Keep the width */
+  height: 180px; /* Slightly increase height */
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px 15px; /* Slight padding to maintain balance */
+  background-color: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Project Image */
+.project-logo {
+  width: 100%; /* Allow the image to take full card width */
+  max-height: 130px; /* Slightly increase height */
+  object-fit: cover; /* Ensures image fits nicely */
+  margin-bottom: 15px;
+}
+
+/* Project Title */
+.project-title {
+  font-size: 22px; /* Increase font size slightly */
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Links for Blog and Code */
+.project-links {
+  margin-top: 15px;
+}
+
+.project-links a {
+  text-decoration: none;
+  font-size: 17px; /* Slightly increase text size */
+  color: #007bff;
+  margin-right: 10px;
+  transition: color 0.3s;
+}
+
+.project-links a:hover {
+  color: #0056b3;
+}
+
+/* Project Description */
+.project-description {
+  display: none; /* Hide the description */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .project-grid {
+      justify-content: start;  /* Align items to the start for small screens */
+      overflow-x: auto;  /* Allow horizontal scrolling on small screens as well */
+  }
+}
+      .section-heading {
+        font-size: 32px;
+        text-align: center;
+        padding: 20px;
+        color: #333;
+    }
+
     </style>
 </head>
 
@@ -58,7 +249,8 @@
                 <a href="https://github.com/pranavAL">Github</a> &nbsp/&nbsp
                 <a href="https://twitter.com/Pranav_AL">Twitter</a> &nbsp/&nbsp
                 <a href="https://scholar.google.com/citations?user=QFEzapMAAAAJ&hl=en">Google Scholar</a> &nbsp/&nbsp
-                <a href="https://www.linkedin.com/in/pranav-agarwal-6b4453114//">Linkedin</a>
+                <a href="https://www.linkedin.com/in/pranav-agarwal-6b4453114//">Linkedin</a>&nbsp/&nbsp
+                <a href="#blogs">Projects</a>
 ]
               </p>
             </td>
@@ -390,39 +582,24 @@
     </tr>
   </table>
 
-<!-- Optional:
-  <section id="projects" style="padding: 50px 0; background-color: #f9f9f9;">
-    <h2 style="text-align: center; font-family: 'Arial', sans-serif; color: #333; font-size: 36px; letter-spacing: 1px; margin-bottom: 30px;">
-      Projects 🤖
-    </h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
-       
-       Block for Project 1
-       <div style="flex: 1 1 30%; max-width: 300px; background-color: #fff; border: 1px solid #e0e0e0; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
-          <h3 style="font-family: 'Arial', sans-serif; color: #555;">Pruning a Vision Transformer</h3>
-          <p style="color: #777;">Short description of the project goes here. Explain what the project does and why it’s cool.</p>
-          <a href="https://github.com/username/project1" target="_blank" style="color: #2196f3; text-decoration: none; font-weight: bold;">View Project &rarr;</a>
-       </div>
-       
-       <!-- Block for Project 2
-       <div style="flex: 1 1 30%; max-width: 300px; background-color: #fff; border: 1px solid #e0e0e0; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
-          <h3 style="font-family: 'Arial', sans-serif; color: #555;">Project Title 2</h3>
-          <p style="color: #777;">Short description of the project goes here. Briefly highlight key features.</p>
-          <a href="https://github.com/username/project2" target="_blank" style="color: #2196f3; text-decoration: none; font-weight: bold;">View Project &rarr;</a>
-       </div> -->
-  
-       <!-- Add more project blocks as needed -->
-    <!-- </div> -->
-  </section>
-  
-  <!-- Optional: Hover effect -->
-  <!-- <style>
-    #projects div:hover {
-      transform: scale(1.05);
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    }
-  </style> -->
+<!-- Add this after your Research section -->
+<section id="blogs">
+  <h2 class="section-heading">Projects</h2>  
+  <div class="project-grid">
+    <div class="project-card">
+      <img src="Projects/project1/diffusion_process_with_timesteps.gif" alt="Diffusion Models" class="project-logo">
+      <div class="project-title">Diffusion Models</div>
+      <div class="project-links">
+        <a href="Projects/project1.html" target="_blank">Blog</a> 
+        <a href="https://colab.research.google.com/drive/1JZWQqpx8QTfkOq3Vc7yaZjpN12KllqFm?usp=sharing" target="_blank">Code</a>
+      </div>
+      </div>
+    </div>
 
+    
+    <!-- Add more project cards as needed -->
+  </div>
+</section>
 
   <table class="about-edu" width="100%">
     <tr>
