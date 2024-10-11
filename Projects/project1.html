@@ -239,7 +239,7 @@
                     latent space, leading to more average-looking samples.
                 </li>
             </ul> 
-            Diffusion models are a class of generative mdoels that offer a new solution, combining stability and high-quality generation. These models generate data by reversing a 
+            Diffusion models are a class of generative models that offer a new solution, combining stability and high-quality generation. These models generate data by reversing a 
             gradual noise addition process. The model learns to undo the noise step-by-step, transforming noise into structured data, allowing for more robust generation.
             <br><br>
             The <strong>intuition</strong> is that instead of trying to directly generate data from a complex distribution in one step (as in GANs), the model does so progressively.
@@ -258,7 +258,7 @@
             </ul>
         
         <div class="math-block">
-                At each timestep \( t \), the nosiy data \( x_t \) is a linear combination of the clean data \( x_0 \) and noise \( \epsilon \):
+                At each timestep \( t \), the noisy data \( x_t \) is a linear combination of the clean data \( x_0 \) and noise \( \epsilon \):
                 $$ x_t = \sqrt{\alpha_{\text{cumprod}, t}}x_0 + \sqrt{1 - \alpha_{\text{cumprod}, t}}\epsilon$$
                 where:
                 <ul>
@@ -290,7 +290,7 @@
         <p>
             <ul>
                 <li>
-                    The model learns the reverse process: given a noisy input \(x _T \), progressively denoisining back to \( x_0 \).
+                    The model learns the reverse process: given a noisy input \(x _T \), progressively denoising back to \( x_0 \).
                 </li>
                 <li>
                     Starting with pure noise, the model gradually denoises it step-by-step, eventually generating clean data.
@@ -310,7 +310,7 @@
                         \( \sum_{\theta}(x_t, t) \) is the predicted variance.
                     </li>
                 </ul>
-                Each step in the reverse process predicts the less noisy smaple at time \( \textit{t} \) - 1 from the 
+                Each step in the reverse process predicts the less noisy sample at time \( \textit{t} \) - 1 from the 
                 current sample \( \textit{x}_t \), based on the following decomposition:
                 $$x_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left( x_t - \frac{1 - \alpha_t}{\sqrt{1 - \alpha_{\text{cumprod}, t}}} \epsilon_\theta(x_t, t) \right) + \sigma_t z$$
                 where,
@@ -461,7 +461,7 @@
         </p>
         <h3 id="sample">2.7 Sampling:</h3>
         <p>
-            After training, new samples can be generated from diffusion model by reversing the forward process:
+            After training, new samples can be generated from the diffusion model by reversing the forward process:
             <ol>
                 <li>
                     Start with random noise: \(x_T \) ~ \( \mathcal{N}(0, I) \)
@@ -478,7 +478,7 @@
                     The final sample \( x_0 \) will be a realistic sample from the data distribution.
                 </li>
             </ol>
-            The iterative denoisining process allows for high-quality and diverse data generation.
+            The iterative denoising process allows for high-quality and diverse data generation.
     <pre>        
     <code class="language-python">
     def generate_and_save_samples(model, betas, alphas_cumprod, device, timesteps, num_samples=16):
@@ -499,11 +499,11 @@
     </pre>
     </p>
     <h2 id="conclusion">4. Conclusion</h2>
-    Diffusion models offer a powerfull approach to genrative modeling, focusing on progressively denoising noisy data to recover structured outputs. Their stability and quality make 
+    Diffusion models offer a powerful approach to generative modeling, focusing on progressively denoising noisy data to recover structured outputs. Their stability and quality make 
     them a better alternative to GANs and VAEs, especially in generating high-quality images and other data modalities.
 
     <p>
-        The full code is availaible to run from this notebook <a href="https://colab.research.google.com/drive/1JZWQqpx8QTfkOq3Vc7yaZjpN12KllqFm?usp=sharing"> Google Colab</a>.
+        The full code is available to run from this notebook <a href="https://colab.research.google.com/drive/1JZWQqpx8QTfkOq3Vc7yaZjpN12KllqFm?usp=sharing"> Google Colab</a>.
     </p>    
     <h2 id="refernce">5. References</h2>
     <ol>
