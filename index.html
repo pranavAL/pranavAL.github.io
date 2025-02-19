@@ -124,16 +124,6 @@
         section {
           padding: 50px 20px;
       }
-/* Project Grid with Horizontal Scroll and Centering */
-.project-grid {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  justify-content: center; /* Center the first project */
-  overflow-x: auto;  /* Enable horizontal scrolling */
-  white-space: nowrap;  /* Ensure the items stay in a single row */
-  transition: justify-content 0.5s ease;  /* Smooth transition when more projects are added */
-}
 
 /* Optional: Style the scrollbar for better visibility */
 .project-grid::-webkit-scrollbar {
@@ -153,11 +143,25 @@
   background: #555;
 }
 
+/* Wrapper Container */
+.project-container {
+  max-width: 800px; /* Adjust this value to control the width */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 0 20px; /* Optional: Add padding to the sides */
+}
+
+/* Grid Layout */
+.project-grid {
+  display: flex;
+  gap: 20px; /* Reduce the gap */
+  justify-content: center; /* Center items */
+  align-items: start; /* Align items properly */
+  padding: 10px; /* Add padding for spacing */
+}
+
 /* Project Card */
 .project-card {
-  flex: 0 0 auto;
-  width: 350px; /* Keep the width */
-  height: 180px; /* Slightly increase height */
+  text-align: center;
   text-align: center;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
@@ -165,7 +169,6 @@
   background-color: #fff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
-  position: relative;
 }
 
 .project-card:hover {
@@ -178,6 +181,7 @@
   width: 100%; /* Allow the image to take full card width */
   max-height: 130px; /* Slightly increase height */
   object-fit: cover; /* Ensures image fits nicely */
+  border-radius: 8px; /* Optional: Add rounded corners to the image */
   margin-bottom: 15px;
 }
 
@@ -205,24 +209,40 @@
   color: #0056b3;
 }
 
-/* Project Description */
-.project-description {
-  display: none; /* Hide the description */
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .project-grid {
-      justify-content: start;  /* Align items to the start for small screens */
-      overflow-x: auto;  /* Allow horizontal scrolling on small screens as well */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Smaller cards on mobile */
+    gap: 10px; /* Reduce the gap for small screens */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    padding-bottom: 10px; /* Add space for scrollbar */
+  }
+
+  .project-card {
+    height: auto; /* Allow height to adjust */
+    padding: 15px 10px; /* Reduce padding for small screens */
+  }
+
+  .project-logo {
+    max-height: 100px; /* Reduce image height for small screens */
+  }
+
+  .project-title {
+    font-size: 18px; /* Reduce font size for small screens */
+  }
+
+  .project-links a {
+    font-size: 14px; /* Reduce link font size for small screens */
   }
 }
-      .section-heading {
-        font-size: 32px;
-        text-align: center;
-        padding: 20px;
-        color: #333;
-    }
+
+/* Section Heading */
+.section-heading {
+  font-size: 32px;
+  text-align: center;
+  padding: 20px;
+  color: #333;
+}
 
     </style>
 </head>
@@ -596,21 +616,31 @@
 
 <!-- Add this after your Research section -->
 <section id="blogs">
-  <h2 class="section-heading">Projects</h2>  
+  <h2 class="section-heading">Projects</h2>
+  <div class="project-container"></div>  
   <div class="project-grid">
+    <div class="project-card">
+      <img src="Projects/project2/3.gif" alt="Mamba" class="project-logo">
+      <div class="project-title">Mamba: Can We Achieve Infinite Context Length?</div>
+      <div class="project-links">
+        <a href="Projects/project2.html" target="_blank">Blog</a> 
+        <a href="https://github.com/pranavAL/deep-learning-from-scratch/tree/main/mamba" target="_blank">Code</a>
+      </div>
+    </div>
     <div class="project-card">
       <img src="Projects/project1/diffusion_process_with_timesteps.gif" alt="Diffusion Models" class="project-logo">
       <div class="project-title">Diffusion Models</div>
       <div class="project-links">
         <a href="Projects/project1.html" target="_blank">Blog</a> 
-        <a href="https://colab.research.google.com/drive/1JZWQqpx8QTfkOq3Vc7yaZjpN12KllqFm?usp=sharing" target="_blank">Code</a>
-      </div>
+        <a href="https://github.com/pranavAL/deep-learning-from-scratch/tree/main/diffusion_models" target="_blank">Code</a>
       </div>
     </div>
-
-    
     <!-- Add more project cards as needed -->
   </div>
+  </div>
+</section>
+    
+    <!-- Add more project cards as needed -->
 </section>
 
   <table class="about-edu" width="100%">
